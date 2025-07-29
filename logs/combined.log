@@ -6975,3 +6975,6 @@
 {"date":"2024-12-05T07:34:26.736Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/team?season=&league=&city=ab&page=1&limit=7"}
 {"date":"2024-12-05T07:34:27.080Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/team?season=&league=&city=a&page=1&limit=7"}
 {"date":"2024-12-05T07:34:27.209Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/team?season=&league=&city=&page=1&limit=7"}
+{"date":"2025-07-29T15:10:13.756Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-07-29T15:11:02.336Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-07-29T15:12:05.790Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/assessment/6888e4862b25de9a8a486641"}

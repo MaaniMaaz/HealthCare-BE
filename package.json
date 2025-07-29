@@ -1,5 +1,5 @@
 {
-  "name": "BE-boilerplate",
+  "name": "HealthCare-BE",
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ah2k-dev/userAuth-with-email-verification.git"
+    "url": ""
   },
-  "author": "ah2k-dev",
+  "author": "ZubairArif234",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ah2k-dev/userAuth-with-email-verification/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/ah2k-dev/userAuth-with-email-verification#readme",
+  "homepage": "",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.617.0",
     "@sendgrid/mail": "^8.1.3",
