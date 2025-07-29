@@ -4,7 +4,7 @@ const assessment = require("../controllers/assessmentController");
 
 
 router.route("/").post(assessment.createAssessment);
-router.route("/:id").post(assessment.getAssessmentById);
+router.route("/:id").get(assessment.getAssessmentById);
 router.route("/:id").put(assessment.updateAssessment);
 router.route("/:id").delete(assessment.deleteAssessment);
 

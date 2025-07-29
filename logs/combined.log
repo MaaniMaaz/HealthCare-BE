@@ -6978,3 +6978,4 @@
 {"date":"2025-07-29T15:10:13.756Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
 {"date":"2025-07-29T15:11:02.336Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
 {"date":"2025-07-29T15:12:05.790Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/assessment/6888e4862b25de9a8a486641"}
+{"date":"2025-07-29T15:16:59.433Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/assessment/6888e4862b25de9a8a486641"}
