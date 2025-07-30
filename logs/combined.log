@@ -6979,3 +6979,43 @@
 {"date":"2025-07-29T15:11:02.336Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
 {"date":"2025-07-29T15:12:05.790Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/assessment/6888e4862b25de9a8a486641"}
 {"date":"2025-07-29T15:16:59.433Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/assessment/6888e4862b25de9a8a486641"}
+{"date":"2025-07-29T15:17:21.049Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/assessment/6888e4862b25de9a8a486641"}
+{"date":"2025-07-30T08:31:14.111Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-07-30T08:31:14.348Z","level":"error","message":"Facility validation failed: facilityName: Path `facilityName` is required., facilityId: Path `facilityId` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T08:31:45.754Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-07-30T08:31:45.760Z","level":"error","message":"Facility validation failed: facilityName: Path `facilityName` is required., facilityId: Path `facilityId` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T08:32:16.321Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-07-30T08:32:16.326Z","level":"error","message":"Facility validation failed: facilityName: Path `facilityName` is required., facilityId: Path `facilityId` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T08:33:57.621Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-07-30T08:35:30.939Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/facility/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T08:35:37.119Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/facility/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T08:35:58.470Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/facility/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T08:35:59.815Z","level":"error","message":"Cannot populate path `assessment` because it is not in your schema. Set the `strictPopulate` option to false to override.","method":"GET","service":"user-service","url":"/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T08:36:17.088Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/facility/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T08:37:10.395Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/facility/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:09:48.094Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking"}
+{"date":"2025-07-30T11:09:48.331Z","level":"error","message":"Booking validation failed: facility: Cast to ObjectId failed for value \"l\" (type string) at path \"facility\" because of \"BSONTypeError\"","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T11:10:29.634Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking"}
+{"date":"2025-07-30T11:10:47.873Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/booking/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:10:47.926Z","level":"error","message":"Booking not found","method":"PUT","service":"user-service","url":"/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:11:32.171Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/booking/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:11:32.265Z","level":"error","message":"Booking not found","method":"PUT","service":"user-service","url":"/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:12:37.380Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/booking/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T11:14:06.579Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/booking/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T11:15:52.892Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/booking/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T11:23:36.104Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking/change-status/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T11:23:54.796Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking/change-status/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T11:23:54.901Z","level":"error","message":"Booking validation failed: status: `confirm` is not a valid enum value for path `status`.","method":"POST","service":"user-service","url":"/change-status/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T11:24:11.691Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking/change-status/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T11:24:31.912Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/booking/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T13:52:01.806Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/tour"}
+{"date":"2025-07-30T13:53:32.274Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/tour"}
+{"date":"2025-07-30T13:53:32.307Z","level":"error","message":"facility is not defined","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T13:54:15.773Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/tour"}
+{"date":"2025-07-30T13:54:15.778Z","level":"error","message":"facility is not defined","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T13:55:09.248Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/tour"}
+{"date":"2025-07-30T13:55:09.326Z","level":"error","message":"Tour validation failed: tourDate: Cast to date failed for value \"24-12-2025\" (type string) at path \"tourDate\"","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T13:55:30.848Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/tour"}
+{"date":"2025-07-30T13:56:12.191Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/tour/688a245286b5e25e712b9e09"}
+{"date":"2025-07-30T13:56:18.018Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour/688a245286b5e25e712b9e09"}
+{"date":"2025-07-30T14:15:23.103Z","level":"info","message":"Request received","method":"DELETE","service":"user-service","url":"/tour/688a245286b5e25e712b9e09"}

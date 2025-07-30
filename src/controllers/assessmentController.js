@@ -100,8 +100,6 @@ const getAssessmentById = async (req, res) => {
   }
 };
 
-
-
 const deleteAssessment = async (req, res) => {
   // #swagger.tags = ['assessment']
   try {

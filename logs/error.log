@@ -354,3 +354,14 @@
 {"date":"2024-12-05T07:04:38.335Z","level":"error","message":"country is not defined","method":"GET","service":"user-service","url":"/?season=&league=&city=&page=1&limit=7"}
 {"date":"2024-12-05T07:04:40.356Z","level":"error","message":"country is not defined","method":"GET","service":"user-service","url":"/?season=&league=&city=&page=1&limit=7"}
 {"date":"2024-12-05T07:22:19.273Z","level":"error","message":"League is required","method":"POST","service":"user-service","url":"/player-standing"}
+{"date":"2025-07-30T08:31:14.348Z","level":"error","message":"Facility validation failed: facilityName: Path `facilityName` is required., facilityId: Path `facilityId` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T08:31:45.760Z","level":"error","message":"Facility validation failed: facilityName: Path `facilityName` is required., facilityId: Path `facilityId` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T08:32:16.326Z","level":"error","message":"Facility validation failed: facilityName: Path `facilityName` is required., facilityId: Path `facilityId` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T08:35:59.815Z","level":"error","message":"Cannot populate path `assessment` because it is not in your schema. Set the `strictPopulate` option to false to override.","method":"GET","service":"user-service","url":"/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:09:48.331Z","level":"error","message":"Booking validation failed: facility: Cast to ObjectId failed for value \"l\" (type string) at path \"facility\" because of \"BSONTypeError\"","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T11:10:47.926Z","level":"error","message":"Booking not found","method":"PUT","service":"user-service","url":"/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:11:32.265Z","level":"error","message":"Booking not found","method":"PUT","service":"user-service","url":"/6889d8f589f42d9e35265f25"}
+{"date":"2025-07-30T11:23:54.901Z","level":"error","message":"Booking validation failed: status: `confirm` is not a valid enum value for path `status`.","method":"POST","service":"user-service","url":"/change-status/6889fda56b51f16139318b50"}
+{"date":"2025-07-30T13:53:32.307Z","level":"error","message":"facility is not defined","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T13:54:15.778Z","level":"error","message":"facility is not defined","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-07-30T13:55:09.326Z","level":"error","message":"Tour validation failed: tourDate: Cast to date failed for value \"24-12-2025\" (type string) at path \"tourDate\"","method":"POST","service":"user-service","url":"/"}
