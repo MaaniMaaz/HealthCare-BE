@@ -6,6 +6,7 @@ const booking = require("./booking")
 const tour = require("./tour")
 const auth = require("./auth")
 const article = require("./community/article")
+const comment = require("./community/comment")
 
 
 router.use("/auth", auth);
@@ -15,5 +16,6 @@ router.use("/booking", booking);
 router.use("/tour", tour);
 router.use("/auth", auth);
 router.use("/article", article);
+router.use("/comment", comment);
 
 module.exports = router;

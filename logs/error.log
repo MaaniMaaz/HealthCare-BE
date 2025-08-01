@@ -388,3 +388,6 @@
 {"date":"2025-08-01T14:41:02.620Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T14:42:48.812Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T14:43:55.131Z","level":"error","message":"Booking validation failed: type: Path `type` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-01T16:39:09.479Z","level":"error","message":"existingArticle is not defined","method":"GET","service":"user-service","url":"/like/688ced4daf49754140005717"}
+{"date":"2025-08-01T16:40:08.353Z","level":"error","message":"existingArticle is not defined","method":"GET","service":"user-service","url":"/like/688ced4daf49754140005717"}
+{"date":"2025-08-01T16:43:18.083Z","level":"error","message":"Comment not found","method":"GET","service":"user-service","url":"/like/688cb15491d6d3cdac1ada3c"}
