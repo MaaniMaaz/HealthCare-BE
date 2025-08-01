@@ -32,7 +32,7 @@ const assessmentSchema = new Schema(
         type:[String],
         required:true
     },
-    zipcode:{
+    zipCode:{
         type:String,
         required:true
     },
