@@ -378,7 +378,3 @@
 {"date":"2025-08-01T09:51:41.539Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T09:52:11.572Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T12:52:49.463Z","level":"error","message":"Article not found","method":"PUT","service":"user-service","url":"/688cae7d261c4576aa23b5c3"}
-{"date":"2025-08-01T14:18:52.800Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
-{"date":"2025-08-01T14:25:27.991Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required., budget: Path `budget` is required.","method":"POST","service":"user-service","url":"/"}
-{"date":"2025-08-01T14:27:49.716Z","level":"error","message":"Assessment validation failed: zipCode: Path `zipCode` is required.","method":"POST","service":"user-service","url":"/"}
-{"date":"2025-08-01T15:13:25.079Z","level":"error","message":"Assessment validation failed: budget: Path `budget` is required.","method":"POST","service":"user-service","url":"/"}

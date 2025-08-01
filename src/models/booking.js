@@ -9,7 +9,6 @@ type: Schema.Types.ObjectId,
     },
     type:{
         type:String,
-        required:true
     },
     preferredDays:{
         type:[String],
