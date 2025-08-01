@@ -7146,3 +7146,11 @@
 {"date":"2025-08-01T13:01:49.670Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-init.js"}
 {"date":"2025-08-01T13:01:50.431Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/favicon-32x32.png"}
 {"date":"2025-08-01T13:05:49.495Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/article/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:07:13.679Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/article/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:07:58.111Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/article/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:12:42.690Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/article/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:14:02.321Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/article/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:20:44.017Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/like/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:20:44.101Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"GET","service":"user-service","url":"/like/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:21:44.249Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/like/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:21:54.513Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/like/688cb15491d6d3cdac1ada3c"}

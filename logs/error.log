@@ -378,3 +378,4 @@
 {"date":"2025-08-01T09:51:41.539Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T09:52:11.572Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T12:52:49.463Z","level":"error","message":"Article not found","method":"PUT","service":"user-service","url":"/688cae7d261c4576aa23b5c3"}
+{"date":"2025-08-01T13:20:44.101Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"GET","service":"user-service","url":"/like/688cb15491d6d3cdac1ada3c"}
