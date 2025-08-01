@@ -127,6 +127,17 @@ const getAllArticles = async (req, res) => {
             ...matchStage 
           }
         },
+        {
+          $lookup: {
+            from: "users",
+            localField: "user",
+            foreignField: "_id",
+            as: "userDetails"
+          }
+        },
+        {
+          $unwind: "$userDetails"
+        },
  {
   $sort:{"createdAt":-1}
  },

@@ -23,7 +23,8 @@ const commentSchema = new Schema(
         required:false
     },
     replies:{
-        type:[String],
+        type:[Schema.Types.ObjectId],
+        ref: "Reply",
         required:false
     },
  

@@ -13,7 +13,7 @@ const replySchema = new Schema(
       ref: "Comment",
       required:true
     },
-    comment:{
+    reply:{
         type:String,
         required:true
     },

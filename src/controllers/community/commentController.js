@@ -36,7 +36,7 @@ const updateComment = async (req, res) => {
       return ErrorHandler("Comment not found", 404, req, res);
     }
 
-    existingArticle.comment = comment ||  existingArticle.comment;
+    existingComment.comment = comment ||  existingComment.comment;
    
 
     await existingComment.save();
@@ -87,7 +87,7 @@ const getAllComments = async (req, res) => {
     
     const { id } = req.params;
      
-    const comments = await Comment.find({"article":id})
+    const comments = await Comment.find({"article":id}).populate('user', 'firstName lastName email').populate('replies')
 
     return SuccessHandler({message:"Comments fetched successfully",comments}, 200, res);
   } catch (error) {
