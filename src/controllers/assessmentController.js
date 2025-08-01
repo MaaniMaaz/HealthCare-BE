@@ -13,7 +13,7 @@ const createAssessment = async (req,res) => {
       currentSituation,
       careType,
       condition,
-      zipcode,
+      zipCode,
       priorities,
       urgency,
       budget,
@@ -27,7 +27,7 @@ const createAssessment = async (req,res) => {
       currentSituation,
       careType,
       condition,
-      zipcode,
+      zipCode,
       priorities,
       urgency,
       budget,
@@ -51,7 +51,7 @@ const updateAssessment = async (req, res) => {
       currentSituation,
       careType,
       condition,
-      zipcode,
+      zipCode,
       priorities,
       urgency,
       budget,
@@ -70,7 +70,7 @@ const updateAssessment = async (req, res) => {
     existingAssessment.currentSituation = currentSituation || existingAssessment.currentSituation;
     existingAssessment.careType = careType || existingAssessment.careType;
     existingAssessment.condition = condition || existingAssessment.condition;
-    existingAssessment.zipcode = zipcode ||  existingAssessment.zipcode;
+    existingAssessment.zipCode = zipCode ||  existingAssessment.zipCode;
     existingAssessment.priorities = priorities ||  existingAssessment.priorities;
     existingAssessment.urgency = urgency || existingAssessment.urgency;
     existingAssessment.budget = budget || existingAssessment.budget;

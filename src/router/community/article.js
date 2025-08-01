@@ -4,6 +4,8 @@ const article = require("../../controllers/community/articleController");
 const { isAuthenticated } = require("../../middleware/auth");
 const uploader = require("../../utils/uploader");
 
+router.route("/").get(isAuthenticated, article.getAllArticles);
+router.route("/mine").get(isAuthenticated, article.getMyArticles);
 router
   .route("/")
   .post(

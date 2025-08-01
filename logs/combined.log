@@ -7154,3 +7154,57 @@
 {"date":"2025-08-01T13:20:44.101Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"GET","service":"user-service","url":"/like/688cb15491d6d3cdac1ada3c"}
 {"date":"2025-08-01T13:21:44.249Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/like/688cb15491d6d3cdac1ada3c"}
 {"date":"2025-08-01T13:21:54.513Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/like/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:23:53.766Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/like/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:24:02.689Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/dislike/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:24:08.162Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/dislike/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T13:29:04.172Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/"}
+{"date":"2025-08-01T13:34:47.949Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/"}
+{"date":"2025-08-01T13:35:11.226Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/?page=2"}
+{"date":"2025-08-01T13:35:29.560Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/?page=2&title=1%20pic"}
+{"date":"2025-08-01T13:35:37.877Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/?page=1&title=1%20pic"}
+{"date":"2025-08-01T13:36:05.255Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/?page=2&title=1%20pic"}
+{"date":"2025-08-01T13:36:19.722Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/?page=1&title=1%20pic"}
+{"date":"2025-08-01T13:36:31.106Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine/?page=1"}
+{"date":"2025-08-01T13:36:37.896Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine/?page=1"}
+{"date":"2025-08-01T13:41:01.522Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine"}
+{"date":"2025-08-01T13:41:40.195Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine"}
+{"date":"2025-08-01T13:43:30.592Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine"}
+{"date":"2025-08-01T13:44:14.023Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article"}
+{"date":"2025-08-01T13:44:29.252Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine"}
+{"date":"2025-08-01T13:45:33.554Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine"}
+{"date":"2025-08-01T13:46:47.626Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine"}
+{"date":"2025-08-01T14:11:56.431Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/article/mine"}
+{"date":"2025-08-01T14:19:40.716Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour"}
+{"date":"2025-08-01T14:19:41.356Z","level":"error","message":"Invalid $addFields :: caused by :: FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:21:22.117Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour"}
+{"date":"2025-08-01T14:21:22.420Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: $getField requires 'field' to evaluate to type String, but got missing","service":"user-service"}
+{"date":"2025-08-01T14:22:51.373Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour"}
+{"date":"2025-08-01T14:22:53.723Z","level":"error","message":"Invalid $addFields :: caused by :: FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:29:58.594Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour"}
+{"date":"2025-08-01T14:29:59.725Z","level":"error","message":"$lookup requires both or neither of 'localField' and 'foreignField' to be specified","service":"user-service"}
+{"date":"2025-08-01T14:31:35.443Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour"}
+{"date":"2025-08-01T14:31:36.459Z","level":"error","message":"FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:34:43.780Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour"}
+{"date":"2025-08-01T14:34:44.136Z","level":"error","message":"Invalid $addFields :: caused by :: FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:35:29.371Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour"}
+{"date":"2025-08-01T14:41:02.259Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-08-01T14:41:02.620Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-01T14:42:48.558Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-08-01T14:42:48.812Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-01T14:43:43.708Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-08-01T14:43:44.096Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-08-01T14:43:44.209Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-08-01T14:43:44.368Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-08-01T14:43:54.835Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking"}
+{"date":"2025-08-01T14:43:55.131Z","level":"error","message":"Booking validation failed: type: Path `type` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-01T14:44:59.976Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking"}
+{"date":"2025-08-01T14:58:30.224Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking"}
+{"date":"2025-08-01T15:03:20.794Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-08-01T15:03:21.109Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/facility/688cd2a05c81f346266cfb11"}
+{"date":"2025-08-01T15:03:21.222Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/facility/688cd2a05c81f346266cfb15"}
+{"date":"2025-08-01T15:03:21.381Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/facility/688cd2a05c81f346266cfb13"}
+{"date":"2025-08-01T15:04:08.210Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-08-01T15:04:08.519Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/facility/688cd2a05c81f346266cfb11"}
+{"date":"2025-08-01T15:04:08.607Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/facility/688cd2a05c81f346266cfb15"}
+{"date":"2025-08-01T15:04:08.634Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/facility/688cd2a05c81f346266cfb13"}
+{"date":"2025-08-01T15:04:41.523Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking"}

@@ -379,3 +379,12 @@
 {"date":"2025-08-01T09:52:11.572Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T12:52:49.463Z","level":"error","message":"Article not found","method":"PUT","service":"user-service","url":"/688cae7d261c4576aa23b5c3"}
 {"date":"2025-08-01T13:20:44.101Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"GET","service":"user-service","url":"/like/688cb15491d6d3cdac1ada3c"}
+{"date":"2025-08-01T14:19:41.356Z","level":"error","message":"Invalid $addFields :: caused by :: FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:21:22.420Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: $getField requires 'field' to evaluate to type String, but got missing","service":"user-service"}
+{"date":"2025-08-01T14:22:53.723Z","level":"error","message":"Invalid $addFields :: caused by :: FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:29:59.725Z","level":"error","message":"$lookup requires both or neither of 'localField' and 'foreignField' to be specified","service":"user-service"}
+{"date":"2025-08-01T14:31:36.459Z","level":"error","message":"FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:34:44.136Z","level":"error","message":"Invalid $addFields :: caused by :: FieldPath field names may not start with '$'. Consider using $getField or $setField.","service":"user-service"}
+{"date":"2025-08-01T14:41:02.620Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-01T14:42:48.812Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-01T14:43:55.131Z","level":"error","message":"Booking validation failed: type: Path `type` is required.","method":"POST","service":"user-service","url":"/"}

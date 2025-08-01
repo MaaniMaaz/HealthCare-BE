@@ -113,6 +113,73 @@ const deleteArticle = async (req, res) => {
   }
 };
 
+const getAllArticles = async (req, res) => {
+  // #swagger.tags = ['articles']
+  try {
+    
+    const { title, page = 1, limit = 10 } = req.query;
+      const matchStage = title
+  ? { "title": { $regex: title, $options: "i" } }
+  : {};
+    const article = await Article.aggregate([
+       {
+          $match: {
+            ...matchStage 
+          }
+        },
+ {
+  $sort:{"createdAt":-1}
+ },
+  {
+    $facet: {
+      totalCount: [{ $count: "count" }],
+      data: [
+        { $skip: (Number(page) - 1) * Number(limit) },
+        { $limit: Number(limit) }
+      ]
+    }
+  }
+]);
+
+    return SuccessHandler({message:"Article fetched successfully",article}, 200, res);
+  } catch (error) {
+    return ErrorHandler(error.message, 500, res);
+  }
+};
+
+const getMyArticles = async (req, res) => {
+  // #swagger.tags = ['articles']
+  try {
+    
+    const { _id } = req.user;
+    const { title, page = 1, limit = 10 } = req.query;
+    const matchStage = {
+      user: _id, 
+      ...(title && { title: { $regex: title, $options: "i" } })
+    };
+    const article = await Article.aggregate([
+       {
+          $match: matchStage
+        },
+//  {
+//   $sort:{"createdAt":-1}
+//  },
+  {
+    $facet: {
+      totalCount: [{ $count: "count" }],
+      data: [
+        { $skip: (Number(page) - 1) * Number(limit) },
+        { $limit: Number(limit) }
+      ]
+    }
+  }
+]);
+
+    return SuccessHandler({message:"Article fetched successfully",article}, 200, res);
+  } catch (error) {
+    return ErrorHandler(error.message, 500, res);
+  }
+};
 
 const likeArticle = async (req, res) => {
   // #swagger.tags = ['article']
@@ -213,5 +280,7 @@ module.exports = {
   getArticleById,
   deleteArticle,
   likeArticle,
-  dislikeArticle
+  dislikeArticle,
+  getAllArticles,
+  getMyArticles
 };

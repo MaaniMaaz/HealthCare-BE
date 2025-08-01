@@ -142,6 +142,11 @@ const getAllTours = async (req, res) => {
 
 
     const tours = await Tour.aggregate([
+      {
+        $addFields: {
+          bookingObjectId: { $toObjectId: "booking" }
+        }
+      },
   {
     $lookup: {
       from: "bookings",
