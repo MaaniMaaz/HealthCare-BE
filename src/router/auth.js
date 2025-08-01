@@ -2,34 +2,20 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../controllers/authController");
 const { isAuthenticated } = require("../middleware/auth");
-const uploader = require("../utils/uploader");
 
-router.route("/register").post(auth.register);
-router.route("/login").post(auth.login);
-router.route("/forgotPassword").post(auth.forgotPassword);
-router.route("/resetPassword").put(auth.resetPassword);
-router.route("/updatePassword").put(isAuthenticated, auth.updatePassword);
-router.route("/me").get(isAuthenticated, auth.getMe);
-router.route("/updateProfile").put(
-  isAuthenticated,
+// Test route to verify routing is working
+router.get("/test", (req, res) => {
+  res.json({ success: true, message: "Auth routes are working!" });
+});
 
-  uploader.fields([
-    { name: "profileImage", maxCount: 1 },
-    { name: "fullImage", maxCount: 1 },
-  ]),
-  auth.updateProfile
-);
+// Authentication routes (temporarily without validation for debugging)
+router.route("/request-login-code").post(auth.requestLoginCode);
+router.route("/verify-login-code").post(auth.verifyLoginCode);
+router.route("/refresh-token").post(auth.refreshToken);
+router.route("/logout").post(isAuthenticated, auth.logout);
+router.route("/profile").get(isAuthenticated, auth.getProfile);
+router.route("/profile").put(isAuthenticated, auth.updateProfile);
 
-router.route("/updateAdminProfile").put(
-  isAuthenticated,
 
-  uploader.fields([
-    { name: "profileImage", maxCount: 1 },
-    // { name: "fullImage", maxCount: 1 },
-  ]),
-  auth.updateAdminProfile
-);
-
-router.route("/socialAuth").post(auth.socialAuth);
 
 module.exports = router;

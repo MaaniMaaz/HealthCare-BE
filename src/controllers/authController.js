@@ -1,359 +1,325 @@
-// const User = require("../models/User/user");
-// const sendMail = require("../utils/sendMail");
-// const SuccessHandler = require("../utils/SuccessHandler");
-// const ErrorHandler = require("../utils/ErrorHandler");
-// const ejs = require("ejs");
-// const path = require("path");
-// const { uploadFiles, deleteFile } = require("../utils/aws");
-// const cloud = require("../functions/cloudinary");
+const User = require("../models/User");
+const VerificationCode = require("../models/VerificationCode");
+const sendMail = require("../utils/sendMail");
+const SuccessHandler = require("../utils/SuccessHandler");
+const ErrorHandler = require("../utils/ErrorHandler");
+const { checkRateLimit } = require("../utils/rateLimiter");
+const ejs = require("ejs");
+const path = require("path");
+const jwt = require("jsonwebtoken");
 
-// //register
-// const register = async (req, res) => {
-//   // #swagger.tags = ['auth']
-//   try {
-//     const { name, email, password, phone, deviceToken } = req.body;
-//     const user = await User.findOne({ $or: [{ email, phone }] });
-//     if (user) {
-//       const msg =
-//         user.email === email
-//           ? "User already exists"
-//           : "Phone number already exists";
-//       return ErrorHandler(msg, 400, req, res);
-//     }
+// Request login verification code
+const requestLoginCode = async (req, res) => {
+  // #swagger.tags = ['auth']
+  try {
+    const { email } = req.body;
 
-//     const newUser = await User.create({
-//       name,
-//       email,
-//       phone,
-//       password,
-//       deviceToken: deviceToken || null,
-//       provider: "app",
-//     });
-//     newUser.save();
+    if (!email) {
+      return ErrorHandler("Email is required", 400, req, res);
+    }
 
-//     const jwtToken = newUser.getJWTToken();
-//     return SuccessHandler(
-//       {
-//         token: jwtToken,
-//         user: newUser,
-//         signup: true,
-//       },
-//       200,
-//       res
-//     );
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return ErrorHandler("Please provide a valid email address", 400, req, res);
+    }
 
-// //login
-// const login = async (req, res) => {
-//   // #swagger.tags = ['auth']
+    // Check rate limiting
+    const rateLimit = checkRateLimit(email);
+    if (!rateLimit.allowed) {
+      return ErrorHandler(
+        `Too many requests. Please try again in ${Math.ceil(rateLimit.retryAfter / 60)} minutes`,
+        429,
+        req,
+        res
+      );
+    }
 
-//   try {
-//     const { email, password, deviceToken } = req.body;
-//     const user = await User.findOne({ email }).select("+password");
-//     if (!user) {
-//       return ErrorHandler("User does not exist", 400, req, res);
-//     }
-//     const isMatch = await user.comparePassword(password);
-//     if (!isMatch) {
-//       return ErrorHandler("Invalid credentials", 400, req, res);
-//     }
-//     if (deviceToken) {
-//       user.deviceToken = deviceToken;
-//       await user.save();
-//     }
-//     jwtToken = user.getJWTToken();
-//     return SuccessHandler(
-//       {
-//         token: jwtToken,
-//         user,
-//       },
-//       200,
-//       res
-//     );
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    // Delete any existing codes for this email
+    await VerificationCode.deleteMany({ email, type: "login" });
 
-// //forgot password
-// const forgotPassword = async (req, res) => {
-//   // #swagger.tags = ['auth']
+    // Generate new verification code
+    const code = VerificationCode.generateCode();
+    
+    // Save verification code
+    await VerificationCode.create({
+      email,
+      code,
+      type: "login",
+    });
 
-//   try {
-//     const { email } = req.body;
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       return ErrorHandler("User does not exist", 400, req, res);
-//     }
-//     const passwordResetToken = Math.floor(100000 + Math.random() * 900000);
-//     const passwordResetTokenExpires = new Date(Date.now() + 10 * 60 * 1000);
-//     user.passwordResetToken = passwordResetToken;
-//     user.passwordResetTokenExpires = passwordResetTokenExpires;
-//     console.log(passwordResetToken);
-//     await user.save();
-//     const ejTemp = await ejs.renderFile(
-//       `${path.join(__dirname, "../ejs")}/forgetPassword.ejs`,
-//       { otp: passwordResetToken }
-//     );
-//     const subject = `Password reset token`;
-//     await sendMail(email, subject, ejTemp);
-//     return SuccessHandler(`Password reset token sent to ${email}`, 200, res);
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    // Send email with verification code
+    const emailTemplate = await ejs.renderFile(
+      path.join(__dirname, "../ejs/loginCode.ejs"),
+      { code }
+    );
 
-// //reset password
-// const resetPassword = async (req, res) => {
-//   // #swagger.tags = ['auth']
+    await sendMail(email, "Your HealthCare Login Code", emailTemplate);
 
-//   try {
-//     const { email, passwordResetToken, password } = req.body;
-//     const user = await User.findOne({ email }).select("+password");
-//     if (!user) {
-//       return ErrorHandler("User does not exist", 400, req, res);
-//     }
-//     if (
-//       user.passwordResetToken.toString() !== passwordResetToken.toString() ||
-//       user.passwordResetTokenExpires < Date.now()
-//     ) {
-//       return ErrorHandler("Invalid token", 400, req, res);
-//     }
-//     user.password = password;
-//     user.passwordResetToken = null;
-//     user.passwordResetTokenExpires = null;
-//     await user.save();
-//     return SuccessHandler("Password reset successfully", 200, res);
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    return SuccessHandler(
+      {
+        message: "Verification code sent to your email",
+        email,
+        expiresIn: "5 minutes",
+      },
+      200,
+      res
+    );
+  } catch (error) {
+    console.error("Request login code error:", error);
+    return ErrorHandler(error.message, 500, req, res);
+  }
+};
 
-// //update password
-// const updatePassword = async (req, res) => {
-//   // #swagger.tags = ['auth']
+// Verify login code and authenticate user
+const verifyLoginCode = async (req, res) => {
+  // #swagger.tags = ['auth']
+  try {
+    const { email, code, deviceToken, name } = req.body;
 
-//   try {
-//     const { currentPassword, newPassword } = req.body;
-//     // if (
-//     //   !newPassword.match(
-//     //     /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/
-//     //   )
-//     // ) {
-//     //   return ErrorHandler(
-//     //     "Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character",
-//     //     400,
-//     //     req,
-//     //     res
-//     //   );
-//     // }
-//     const user = await User.findById(req.user.id).select("+password");
-//     const isMatch = await user.comparePassword(currentPassword);
-//     if (!isMatch) {
-//       return ErrorHandler("Invalid credentials", 400, req, res);
-//     }
-//     const samePasswords = await user.comparePassword(newPassword);
-//     if (samePasswords) {
-//       return ErrorHandler(
-//         "New password cannot be same as old password",
-//         400,
-//         req,
-//         res
-//       );
-//     }
-//     user.password = newPassword;
-//     await user.save();
-//     return SuccessHandler("Password updated successfully", 200, res);
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    if (!email || !code) {
+      return ErrorHandler("Email and verification code are required", 400, req, res);
+    }
 
-// const updateProfile = async (req, res) => {
-//   // #swagger.tags = ['auth']
+    // Find verification code
+    const verificationRecord = await VerificationCode.findOne({
+      email,
+      code,
+      type: "login",
+    });
 
-//   try {
-//     const data = req.body;
+    if (!verificationRecord) {
+      return ErrorHandler("Invalid verification code", 400, req, res);
+    }
 
-//     const user = await User.findById(req.user.id);
-//     if (!user) {
-//       return ErrorHandler("User does not exist", 400, req, res);
-//     }
+    // Check if code is valid
+    if (!verificationRecord.isValid()) {
+      await VerificationCode.deleteOne({ _id: verificationRecord._id });
+      return ErrorHandler("Verification code has expired or exceeded maximum attempts", 400, req, res);
+    }
 
-//     let profileLink = user?.athleticDetails?.profileImage;
-//     let fullLink = user?.athleticDetails?.fullImage;
+    // Increment attempts
+    verificationRecord.attempts += 1;
+    await verificationRecord.save();
 
-//     if (req.files) {
-//       if (req.files?.profileImage[0]) {
-//         console.log("profileImage");
+    // Mark code as used
+    verificationRecord.isUsed = true;
+    await verificationRecord.save();
 
-//         const img = req.files.profileImage[0];
-//         const filePath = `${Date.now()}-${path.parse(img?.originalname)?.name}`;
-//         const url = await cloud.uploadStreamImage(img.buffer, filePath);
-//         if (profileLink) {
-//           await cloud.deleteImage(profileLink);
-//         }
-//         profileLink = url.secure_url;
+    // Find or create user
+    let user = await User.findOne({ email });
+    let isNewUser = false;
 
-//         // const awsRes = await uploadFiles([req.files.profileImage]);
-//         // if (awsRes.length > 0) {
-//         //   await deleteFile(user.athleticDetails.profileImage);
-//         // }
-//         // profileLink = awsRes[0];
-//       }
-//       if (req.files?.fullImage[0]) {
-//         console.log("fullImage");
+    if (!user) {
+      // Create new user
+      user = await User.create({
+        email,
+        name: name || email.split('@')[0],
+        deviceToken: deviceToken || null,
+      });
+      isNewUser = true;
 
-//         const img = req.files.fullImage[0];
-//         const filePath = `${Date.now()}-${path.parse(img?.originalname)?.name}`;
-//         const url = await cloud.uploadStreamImage(img.buffer, filePath);
-//         if (fullLink) {
-//           await cloud.deleteImage(fullLink);
-//         }
+      // Send welcome email for new users
+      try {
+        const welcomeTemplate = await ejs.renderFile(
+          path.join(__dirname, "../ejs/welcome.ejs"),
+          { name: user.name }
+        );
+        await sendMail(email, "Welcome to HealthCare!", welcomeTemplate);
+      } catch (emailError) {
+        console.error("Welcome email error:", emailError);
+        // Don't fail the registration if welcome email fails
+      }
+    } else {
+      // Update existing user
+      if (deviceToken) {
+        user.deviceToken = deviceToken;
+      }
+      user.lastLoginAt = new Date();
+      await user.save();
+    }
 
-//         fullLink = url.secure_url;
-//         // const awsRes = await uploadFiles([req.files.fullImage]);
-//         // if (awsRes.length > 0) {
-//         //   await deleteFile(user.athleticDetails.fullImage);
-//         // }
-//         // fullLink = awsRes[0];
-//       }
-//     }
-//     if (data.email || data.password) {
-//       return ErrorHandler(
-//         "Email and password cannot be updated here",
-//         400,
-//         req,
-//         res
-//       );
-//     }
+    // Generate tokens
+    const token = user.getJWTToken();
+    const refreshToken = user.getRefreshToken();
 
-//     const updated = await User.findByIdAndUpdate(
-//       req.user._id,
-//       {
-//         ...data,
-//         athleticDetails: {
-//           ...(req.body.athleticDetails || user.athleticDetails),
-//           profileImage: profileLink,
-//           fullImage: fullLink,
-//         },
-//       },
-//       {
-//         new: true,
-//       }
-//     );
-//     return SuccessHandler(updated, 200, res);
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    // Clean up used verification code
+    await VerificationCode.deleteOne({ _id: verificationRecord._id });
 
-// const getMe = async (req, res) => {
-//   // #swagger.tags = ['auth']
-//   try {
-//     const user = await User.findById(req.user._id);
-//     return SuccessHandler(user, 200, res);
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    return SuccessHandler(
+      {
+        message: isNewUser ? "Account created and logged in successfully" : "Logged in successfully",
+        token,
+        refreshToken,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          profileImage: user.profileImage,
+          role: user.role,
+          lastLoginAt: user.lastLoginAt,
+        },
+        isNewUser,
+      },
+      200,
+      res
+    );
+  } catch (error) {
+    console.error("Verify login code error:", error);
+    return ErrorHandler(error.message, 500, req, res);
+  }
+};
 
-// const updateAdminProfile = async (req, res) => {
-//   // #swagger.tags = ['auth']
-//   try {
-//     const { name, country, phone, zip } = req.body;
+// Refresh JWT token
+const refreshToken = async (req, res) => {
+  // #swagger.tags = ['auth']
+  try {
+    const { refreshToken } = req.body;
 
-//     const user = await User.findById(req.user._id);
-//     let profileLink =
-//       req.body?.profileImage === "null"
-//         ? null
-//         : user?.athleticDetails?.profileImage;
+    if (!refreshToken) {
+      return ErrorHandler("Refresh token is required", 400, req, res);
+    }
 
-//     if (
-//       req.files &&
-//       req.files?.profileImage &&
-//       req.files?.profileImage?.length > 0
-//     ) {
-//       const img = req.files.profileImage[0];
-//       const filePath = `${Date.now()}-${path.parse(img?.originalname)?.name}`;
-//       const url = await cloud.uploadStreamImage(img.buffer, filePath);
-//       if (profileLink) {
-//         await cloud.deleteImage(profileLink);
-//       }
-//       profileLink = url.secure_url;
-//     }
+    // Verify refresh token
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET || "healthcare_refresh_secret");
+    
+    // Find user
+    const user = await User.findById(decoded.id);
+    if (!user || !user.isActive) {
+      return ErrorHandler("Invalid refresh token", 401, req, res);
+    }
 
-//     const updated = await User.findByIdAndUpdate(
-//       req.user._id,
-//       {
-//         name,
-//         country,
-//         phone,
-//         zip,
-//         athleticDetails: {
-//           // ...(req.body.athleticDetails || user.athleticDetails),
-//           profileImage: profileLink,
-//         },
-//       },
-//       {
-//         new: true,
-//       }
-//     );
+    // Generate new tokens
+    const newToken = user.getJWTToken();
+    const newRefreshToken = user.getRefreshToken();
 
-//     return SuccessHandler(updated, 200, res);
-//   } catch (error) {
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    return SuccessHandler(
+      {
+        token: newToken,
+        refreshToken: newRefreshToken,
+      },
+      200,
+      res
+    );
+  } catch (error) {
+    return ErrorHandler("Invalid refresh token", 401, req, res);
+  }
+};
 
-// const socialAuth = async (req, res) => {
-//   // #swagger.tags = ['auth']
-//   try {
-//     const { email, name } = req.body;
+// Logout user
+const logout = async (req, res) => {
+  // #swagger.tags = ['auth']
+  try {
+    // Clear device token if provided
+    if (req.user && req.body.clearDeviceToken) {
+      await User.findByIdAndUpdate(req.user._id, { deviceToken: null });
+    }
 
-//     const exUser = await User.findOne({ email });
-//     console.log(exUser);
-//     if (exUser && exUser.provider === "google") {
-//       const token = await exUser.getJWTToken();
-//       if (req.body?.deviceToken) {
-//         exUser.deviceToken = req.body.deviceToken;
-//         await exUser.save();
-//       }
-//       return SuccessHandler({ token, user: exUser }, 200, res);
-//     } else if (exUser && exUser.provider !== "google") {
-//       return ErrorHandler(
-//         "You have previously signed up with password. Use password instead",
-//         400,
-//         req,
-//         res
-//       );
-//     } else {
-//       const user = await User.create({
-//         email,
-//         name,
-//         provider: "google",
-//         deviceToken: req.body?.deviceToken || null,
-//       });
-//       const token = await user.getJWTToken();
-//       return SuccessHandler({ token, user, signup: true }, 200, res);
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     return ErrorHandler(error.message, 500, req, res);
-//   }
-// };
+    return SuccessHandler("Logged out successfully", 200, res);
+  } catch (error) {
+    return ErrorHandler(error.message, 500, req, res);
+  }
+};
 
-// module.exports = {
-//   register,
-//   login,
-//   forgotPassword,
-//   resetPassword,
-//   updatePassword,
-//   getMe,
-//   updateProfile,
-//   updateAdminProfile,
-//   socialAuth,
-// };
+// Get user profile
+const getProfile = async (req, res) => {
+  // #swagger.tags = ['auth']
+  try {
+    const user = await User.findById(req.user._id).select('-__v');
+    
+    if (!user || !user.isActive) {
+      return ErrorHandler("User not found", 404, req, res);
+    }
+
+    return SuccessHandler(
+      {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        profileImage: user.profileImage,
+        role: user.role,
+        lastLoginAt: user.lastLoginAt,
+      },
+      200,
+      res
+    );
+  } catch (error) {
+    console.error("Get profile error:", error);
+    return ErrorHandler(error.message, 500, req, res);
+  }
+};
+
+// Update user profile
+const updateProfile = async (req, res) => {
+  // #swagger.tags = ['auth']
+  try {
+    const { name, phone } = req.body;
+    const userId = req.user._id;
+
+    // Validate input
+    if (!name && !phone) {
+      return ErrorHandler("At least one field (name or phone) is required", 400, req, res);
+    }
+
+    // Prepare update data
+    const updateData = {};
+    if (name) {
+      if (name.trim().length < 2) {
+        return ErrorHandler("Name must be at least 2 characters long", 400, req, res);
+      }
+      updateData.name = name.trim();
+    }
+    
+    if (phone) {
+      // Basic phone validation
+      const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+      if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+        return ErrorHandler("Please provide a valid phone number", 400, req, res);
+      }
+      updateData.phone = phone.trim();
+    }
+
+    // Update user
+    const user = await User.findByIdAndUpdate(
+      userId,
+      updateData,
+      { new: true, runValidators: true }
+    ).select('-__v');
+
+    if (!user) {
+      return ErrorHandler("User not found", 404, req, res);
+    }
+
+    return SuccessHandler(
+      {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        profileImage: user.profileImage,
+        role: user.role,
+        lastLoginAt: user.lastLoginAt,
+      },
+      200,
+      res
+    );
+  } catch (error) {
+    console.error("Update profile error:", error);
+    return ErrorHandler(error.message, 500, req, res);
+  }
+};
+
+
+
+
+
+module.exports = {
+  requestLoginCode,
+  verifyLoginCode,
+  refreshToken,
+  logout,
+  getProfile,
+  updateProfile,
+};

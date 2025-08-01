@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to HealthCare</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 10px;
+        }
+        .welcome-banner {
+            background: linear-gradient(135deg, #2c5aa0, #4a90e2);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .features {
+            margin: 30px 0;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .feature-icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🏥 HealthCare</div>
+        </div>
+        
+        <div class="welcome-banner">
+            <h1>Welcome to HealthCare!</h1>
+            <p>Your health journey starts here</p>
+        </div>
+        
+        <p>Hello <strong><%= name || 'there' %></strong>,</p>
+        <p>Welcome to HealthCare! We're excited to have you join our community. Your account has been successfully created and you can now access all our healthcare services.</p>
+        
+        <div class="features">
+            <h3>What you can do with HealthCare:</h3>
+            <div class="feature">
+                <div class="feature-icon">📅</div>
+                <div>
+                    <strong>Book Appointments</strong><br>
+                    Schedule appointments with healthcare professionals
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🏥</div>
+                <div>
+                    <strong>Find Facilities</strong><br>
+                    Locate nearby healthcare facilities and services
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📋</div>
+                <div>
+                    <strong>Health Assessments</strong><br>
+                    Take health assessments and track your wellness
+                </div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <div>
+                    <strong>Virtual Tours</strong><br>
+                    Explore facilities with virtual tours before visiting
+                </div>
+            </div>
+        </div>
+        
+        <p>If you have any questions or need assistance, our support team is here to help.</p>
+        
+        <div class="footer">
+            <p>Thank you for choosing HealthCare for your healthcare needs.</p>
+            <p>&copy; 2025 HealthCare. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

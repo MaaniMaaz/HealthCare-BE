@@ -1,33 +1,84 @@
-// const jwt = require("jsonwebtoken");
-// const User = require("../models/User/user");
-// const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+const ErrorHandler = require("../utils/ErrorHandler");
 
-// dotenv.config({ path: ".././src/config/config.env" });
+const isAuthenticated = async (req, res, next) => {
+  try {
+    let token = req.headers.authorization;
+    
+    if (!token) {
+      return ErrorHandler("Access token is required", 401, req, res);
+    }
 
-// const isAuthenticated = async (req, res, next) => {
-//   try {
-//     const token = req.headers.authorization;
-//     if (!token) {
-//       return res.status(401).json({ success: false, message: "Not logged in" });
-//     }
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//     req.user = await User.findById(decoded._id);
-//     if (!req.user) {
-//       return res
-//         .status(404)
-//         .json({ success: false, message: "User not found" });
-//     }
-//     next();
-//   } catch (error) {
-//     res.status(500).json({ success: false, message: error.message });
-//   }
-// };
+    // Remove 'Bearer ' prefix if present
+    if (token.startsWith('Bearer ')) {
+      token = token.slice(7);
+    }
 
-// const isAdmin = (req, res, next) => {
-//   if (req.user.role !== "admin") {
-//     return res.status(403).json({ success: false, message: "Forbidden" });
-//   }
-//   next();
-// };
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "healthcare_secret");
+    
+    // Find user
+    const user = await User.findById(decoded.id);
+    if (!user || !user.isActive) {
+      return ErrorHandler("User not found or inactive", 404, req, res);
+    }
 
-// module.exports = { isAuthenticated, isAdmin };
+    req.user = user;
+    next();
+  } catch (error) {
+    if (error.name === 'JsonWebTokenError') {
+      return ErrorHandler("Invalid access token", 401, req, res);
+    }
+    if (error.name === 'TokenExpiredError') {
+      return ErrorHandler("Access token has expired", 401, req, res);
+    }
+    return ErrorHandler(error.message, 500, req, res);
+  }
+};
+
+const isAdmin = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return ErrorHandler("Admin access required", 403, req, res);
+  }
+  next();
+};
+
+const isDoctor = (req, res, next) => {
+  if (req.user.role !== "doctor" && req.user.role !== "admin") {
+    return ErrorHandler("Doctor access required", 403, req, res);
+  }
+  next();
+};
+
+// Optional authentication - doesn't fail if no token
+const optionalAuth = async (req, res, next) => {
+  try {
+    let token = req.headers.authorization;
+    
+    if (!token) {
+      req.user = null;
+      return next();
+    }
+
+    if (token.startsWith('Bearer ')) {
+      token = token.slice(7);
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "healthcare_secret");
+    const user = await User.findById(decoded.id);
+    
+    req.user = user && user.isActive ? user : null;
+    next();
+  } catch (error) {
+    req.user = null;
+    next();
+  }
+};
+
+module.exports = { 
+  isAuthenticated, 
+  isAdmin, 
+  isDoctor, 
+  optionalAuth 
+};

@@ -5,7 +5,7 @@ const http = require("http");
 const socket = require("socket.io");
 const { removeUser, addUser } = require("./functions/socketFunctions");
 
-dotenv.config({ path: "./src/config/config.env" }); //load env vars
+dotenv.config({ path: "./.env" }); //load env vars
 
 //global vars
 global.io; 

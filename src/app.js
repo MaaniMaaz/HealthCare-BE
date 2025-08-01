@@ -9,7 +9,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("../swagger_output.json"); // Generated Swagger file
 const path = require("path");
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config/config.env" });
+dotenv.config({ path: "./.env" });
 // const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const moment = require('moment')
 
