@@ -114,7 +114,7 @@ const deleteArticle = async (req, res) => {
 };
 
 const getAllArticles = async (req, res) => {
-  // #swagger.tags = ['articles']
+  // #swagger.tags = ['article']
   try {
     
     const { title, page = 1, limit = 10 } = req.query;
@@ -148,7 +148,7 @@ const getAllArticles = async (req, res) => {
 };
 
 const getMyArticles = async (req, res) => {
-  // #swagger.tags = ['articles']
+  // #swagger.tags = ['article']
   try {
     
     const { _id } = req.user;
