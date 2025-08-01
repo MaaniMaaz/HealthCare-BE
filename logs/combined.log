@@ -7119,3 +7119,8 @@
 {"date":"2025-08-01T09:51:41.539Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-01T09:52:11.565Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
 {"date":"2025-08-01T09:52:11.572Z","level":"error","message":"Assessment validation failed: zipcode: Path `zipcode` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-01T10:21:18.056Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/request-login-code"}
+{"date":"2025-08-01T10:21:40.833Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/verify-login-code"}
+{"date":"2025-08-01T10:22:00.096Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/auth/profile"}
+{"date":"2025-08-01T10:22:52.591Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
+{"date":"2025-08-01T10:23:16.866Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
