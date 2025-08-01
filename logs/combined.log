@@ -7124,14 +7124,3 @@
 {"date":"2025-08-01T10:22:00.096Z","level":"info","message":"Request received","method":"PUT","service":"user-service","url":"/auth/profile"}
 {"date":"2025-08-01T10:22:52.591Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
 {"date":"2025-08-01T10:23:16.866Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
-{"date":"2025-08-01T12:27:33.368Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
-{"date":"2025-08-01T12:27:35.572Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
-{"date":"2025-08-01T12:27:41.178Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/logout"}
-{"date":"2025-08-01T12:27:55.073Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/request-login-code"}
-{"date":"2025-08-01T12:28:12.037Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/request-login-code"}
-{"date":"2025-08-01T12:28:27.571Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/verify-login-code"}
-{"date":"2025-08-01T12:36:13.365Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
-{"date":"2025-08-01T12:56:35.239Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
-{"date":"2025-08-01T12:56:47.130Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
-{"date":"2025-08-01T12:56:59.977Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
-{"date":"2025-08-01T12:57:00.686Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
