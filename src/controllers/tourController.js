@@ -109,7 +109,7 @@ const deleteTour = async (req, res) => {
 };
 
 const changeTourStatus = async (req , res) => {
-    // #swagger.tags = ['Tour']
+    // #swagger.tags = ['tour']
     try{
           const { id } = req.params;
           const {status} = req.body
@@ -128,11 +128,82 @@ const changeTourStatus = async (req , res) => {
     }
 }
 
+const getAllTours = async (req, res) => {
+  // #swagger.tags = ['tour']
+  try {
+    const {email} = req.user
+    
+    const { title, page = 1, limit = 10 } = req.query;
+
+    const matchStage = title
+  ? { "facility.facilityName": { $regex: title, $options: "i" } }
+  : {};
+
+
+
+    const tours = await Tour.aggregate([
+  {
+    $lookup: {
+      from: "bookings",
+      localField: "booking",
+      foreignField: "_id",
+      as: "booking"
+    }
+  },
+  {
+    $unwind:"$booking"
+  },
+  {
+    $lookup: {
+      from: "facilities",
+      localField: "booking.facility",
+      foreignField: "_id",
+      as: "facility"
+    }
+  },
+   {
+    $unwind:"$facility"
+  },
+  {
+    $lookup: {
+      from: "assessments",
+      localField: "facility.assessment",
+      foreignField: "_id",
+      as: "assessment"
+    }
+  },
+   {
+    $unwind:"$assessment"
+  },
+ {
+    $match: {
+      ...(email && { "assessment.email": email }),
+      ...matchStage 
+    }
+  },
+  {
+    $facet: {
+      totalCount: [{ $count: "count" }],
+      data: [
+        { $skip: (Number(page) - 1) * Number(limit) },
+        { $limit: Number(limit) }
+      ]
+    }
+  }
+]);
+
+    return SuccessHandler({message:"Tours fetched successfully",tours}, 200, res);
+  } catch (error) {
+    return ErrorHandler(error.message, 500, res);
+  }
+};
+
 
 module.exports = {
   createTour,
   updateTour,
   getTourById,
   deleteTour,
-  changeTourStatus
+  changeTourStatus,
+  getAllTours
 };
