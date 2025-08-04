@@ -116,43 +116,66 @@ const deleteArticle = async (req, res) => {
 const getAllArticles = async (req, res) => {
   // #swagger.tags = ['article']
   try {
-    
+    const { _id } = req.user;
     const { title, page = 1, limit = 10 } = req.query;
-      const matchStage = title
-  ? { "title": { $regex: title, $options: "i" } }
-  : {};
-    const article = await Article.aggregate([
-       {
-          $match: {
-            ...matchStage 
-          }
-        },
-        {
-          $lookup: {
-            from: "users",
-            localField: "user",
-            foreignField: "_id",
-            as: "userDetails"
-          }
-        },
-        {
-          $unwind: "$userDetails"
-        },
- {
-  $sort:{"createdAt":-1}
- },
-  {
-    $facet: {
-      totalCount: [{ $count: "count" }],
-      data: [
-        { $skip: (Number(page) - 1) * Number(limit) },
-        { $limit: Number(limit) }
-      ]
-    }
-  }
-]);
+    
+    const matchStage = title
+      ? { "title": { $regex: title, $options: "i" } }
+      : {};
 
-    return SuccessHandler({message:"Article fetched successfully",article}, 200, res);
+    const article = await Article.aggregate([
+      {
+        $match: {
+          ...matchStage 
+        }
+      },
+      {
+        $addFields: {
+          isLiked: {
+            $or: [
+              { $in: [_id, "$likes"] }, // Check as current type
+              { $in: [{ $toString: _id }, "$likes"] }, // Check as string
+              { $in: [{ $toObjectId: _id }, "$likes"] } // Check as ObjectId (only if _id is valid ObjectId string)
+            ]
+          },
+          isDisliked: {
+            $or: [
+              { $in: [_id, "$dislikes"] }, // Check as current type
+              { $in: [{ $toString: _id }, "$dislikes"] }, // Check as string
+              { $in: [{ $toObjectId: _id }, "$dislikes"] } // Check as ObjectId (only if _id is valid ObjectId string)
+            ]
+          },
+          // Optional: Add counts
+          likesCount: { $size: { $ifNull: ["$likes", []] } },
+          dislikesCount: { $size: { $ifNull: ["$dislikes", []] } }
+        }
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "userDetails"
+        }
+      },
+      {
+        $unwind: "$userDetails"
+      },
+      {
+        $sort: { "createdAt": -1 }
+      },
+      {
+        $facet: {
+          totalCount: [{ $count: "count" }],
+          data: [
+            { $skip: (Number(page) - 1) * Number(limit) },
+            { $limit: Number(limit) }
+          ]
+        }
+      }
+    ]);
+
+    return SuccessHandler({ message: "Article fetched successfully", article }, 200, res);
   } catch (error) {
     return ErrorHandler(error.message, 500, res);
   }

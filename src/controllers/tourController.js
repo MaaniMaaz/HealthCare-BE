@@ -1,6 +1,7 @@
 const SuccessHandler = require("../utils/SuccessHandler");
 const ErrorHandler = require("../utils/ErrorHandler");
 const Tour = require("../models/tour");
+const { default: mongoose } = require("mongoose");
 
 const createTour = async (req,res) => {
   // #swagger.tags = ['tour']
@@ -131,75 +132,82 @@ const changeTourStatus = async (req , res) => {
 const getAllTours = async (req, res) => {
   // #swagger.tags = ['tour']
   try {
-    const {email} = req.user
+    const { email } = req.user;
     
     const { title, page = 1, limit = 10 } = req.query;
 
     const matchStage = title
-  ? { "facility.facilityName": { $regex: title, $options: "i" } }
-  : {};
+      ? { "facility.facilityName": { $regex: title, $options: "i" } }
+      : {};
 
-
-
+    // Alternative approach - assuming Tour has a booking field that's already an ObjectId
     const tours = await Tour.aggregate([
-      {
-        $addFields: {
-          bookingObjectId: { $toObjectId: "booking" }
-        }
-      },
-  {
-    $lookup: {
-      from: "bookings",
-      localField: "booking",
-      foreignField: "_id",
-      as: "booking"
-    }
-  },
-  {
-    $unwind:"$booking"
-  },
-  {
-    $lookup: {
-      from: "facilities",
-      localField: "booking.facility",
-      foreignField: "_id",
-      as: "facility"
-    }
-  },
    {
-    $unwind:"$facility"
-  },
-  {
-    $lookup: {
-      from: "assessments",
-      localField: "facility.assessment",
-      foreignField: "_id",
-      as: "assessment"
-    }
-  },
-   {
-    $unwind:"$assessment"
-  },
- {
-    $match: {
-      ...(email && { "assessment.email": email }),
-      ...matchStage 
-    }
-  },
-  {
-    $facet: {
-      totalCount: [{ $count: "count" }],
-      data: [
-        { $skip: (Number(page) - 1) * Number(limit) },
-        { $limit: Number(limit) }
-      ]
+  $addFields: {
+    bookingObjectId: {
+      $convert: {
+        input: "$booking",
+        to: "objectId",
+        onError: null,       // <-- prevents aggregation failure
+        onNull: null
+      }
     }
   }
-]);
+},
+{
+  $lookup: {
+    from: "bookings",
+    localField: "bookingObjectId",
+    foreignField: "_id",
+    as: "booking"
+  }
+},
+      {
+        $unwind: "$booking"
+      },
+      {
+        $lookup: {
+          from: "facilities",
+          localField: "booking.facility",
+          foreignField: "_id",
+          as: "facility"
+        }
+      },
+      {
+        $unwind: "$facility"
+      },
+      {
+        $lookup: {
+          from: "assessments",
+          localField: "facility.assessment",
+          foreignField: "_id",
+          as: "assessment"
+        }
+      },
+      {
+        $unwind: "$assessment"
+      },
+      {
+        $match: {
+          ...(email && { "assessment.email": email }),
+          ...matchStage 
+        }
+      },
+      {
+        $facet: {
+          totalCount: [{ $count: "count" }],
+          data: [
+            { $skip: (Number(page) - 1) * Number(limit) },
+            { $limit: Number(limit) }
+          ]
+        }
+      }
+    ]);
 
-    return SuccessHandler({message:"Tours fetched successfully",tours}, 200, res);
+    return SuccessHandler({ message: "Tours fetched successfully", tours }, 200, res);
   } catch (error) {
-    return ErrorHandler(error.message, 500, res);
+    console.error('Error in getAllTours:', error);
+    return ErrorHandler(error.message, 500, req,res);
   }
 };
 
