@@ -1,6 +1,7 @@
 const SuccessHandler = require("../../utils/SuccessHandler");
 const ErrorHandler = require("../../utils/ErrorHandler");
 const Comment = require("../../models/community/comments");
+const { default: mongoose } = require("mongoose");
 
 
 const createComment = async (req, res) => {
@@ -81,19 +82,97 @@ const deleteComment = async (req, res) => {
   }
 };
 
+
 const getAllComments = async (req, res) => {
   // #swagger.tags = ['comment']
   try {
-    
     const { id } = req.params;
-     
-    const comments = await Comment.find({"article":id}).populate('user', 'firstName lastName email').populate('replies')
+    const { _id } = req.user;
 
-    return SuccessHandler({message:"Comments fetched successfully",comments}, 200, res);
+   const comments = await Comment.aggregate([
+  {
+    $match: {
+      article: new mongoose.Types.ObjectId(id)
+    }
+  },
+
+  {
+    $lookup: {
+      from: "users",
+      localField: "user",
+      foreignField: "_id",
+      as: "user"
+    }
+  },
+  { $unwind: "$user" },
+  {
+    $lookup: {
+      from: "replies",
+      localField: "replies",
+      foreignField: "_id",
+      as: "replies"
+    }
+  },
+  { $unwind: { path: "$replies", preserveNullAndEmptyArrays: true } },
+  {
+    $lookup: {
+      from: "users",
+      localField: "replies.user",
+      foreignField: "_id",
+      as: "replies.user"
+    }
+  },
+  {
+    $unwind: {
+      path: "$replies.user",
+      preserveNullAndEmptyArrays: true
+    }
+  },
+  {
+    $group: {
+      _id: "$_id",
+      content: { $first: "$content" },
+      user: { $first: "$user" },
+      likes: { $first: "$likes" },
+      createdAt: { $first: "$createdAt" },
+      replies: {
+        $push: {
+          $cond: [
+            { $gt: ["$replies._id", null] },
+            "$replies",
+            "$$REMOVE"
+          ]
+        }
+      }
+    }
+  },
+    {
+        $addFields: {
+          isLiked: {
+            $or: [
+              { $in: [_id, "$likes"] }, 
+              { $in: [{ $toString: _id }, "$likes"] }, 
+              { $in: [{ $toObjectId: _id }, "$likes"] }  ]
+          },
+          
+         
+        }
+      },
+  
+  { $sort: { createdAt: -1 } }
+]);
+
+
+    return SuccessHandler(
+      { message: "Comments fetched successfully", comments },
+      200,
+      res
+    );
   } catch (error) {
-    return ErrorHandler(error.message, 500, res);
+    return ErrorHandler(error.message, 500, req, res);
   }
 };
+
 
 
 const likeComment = async (req, res) => {

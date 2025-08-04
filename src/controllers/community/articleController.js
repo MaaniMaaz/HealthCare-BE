@@ -3,6 +3,8 @@ const ErrorHandler = require("../../utils/ErrorHandler");
 const Article = require("../../models/community/article");
 const cloud = require("../../functions/cloudinary");
 const path = require("path");
+const { ideahub } = require("googleapis/build/src/apis/ideahub");
+const { default: mongoose } = require("mongoose");
 
 const createArticle = async (req, res) => {
   // #swagger.tags = ['article']
@@ -83,14 +85,49 @@ const getArticleById = async (req, res) => {
   // #swagger.tags = ['booking']
   try {
     const { id } = req.params;
+    const { _id } = req.user;
 
-    const article = await Article.findById(id)
+    // const article = await Article.findById(id).populate("user")
+    const article = await Article.aggregate([
+      {
+  $match: {
+    "_id": new mongoose.Types.ObjectId(id)
+  }
+},{
+        $lookup: {
+    from: "users",
+    localField: "user",
+    foreignField: "_id",
+    as: "user"
+  }
+      },
+      {
+        $unwind:'$user'
+      },
+      {
+        $addFields: {
+          isLiked: {
+            $or: [
+              { $in: [_id, "$likes"] }, 
+              { $in: [{ $toString: _id }, "$likes"] }, 
+              { $in: [{ $toObjectId: _id }, "$likes"] }  ]
+          },
+          isDisliked: {
+            $or: [
+              { $in: [_id, "$dislikes"] }, 
+              { $in: [{ $toString: _id }, "$dislikes"] }, 
+              { $in: [{ $toObjectId: _id }, "$dislikes"] }  ]
+          },
+         
+        }
+      },
+    ])
 
     if (!article) {
       return ErrorHandler("Article not found", 404, req, res);
     }
 
-    return SuccessHandler(article, 200, res);
+    return SuccessHandler(article[0], 200, res);
   } catch (error) {
     return ErrorHandler(error.message, 500, req, res);
   }

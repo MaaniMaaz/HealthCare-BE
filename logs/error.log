@@ -17,3 +17,19 @@
 {"date":"2025-08-04T09:07:59.245Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: Unsupported conversion from object to objectId in $convert with no onError value","method":"GET","service":"user-service","url":"/?page=1&limit=6"}
 {"date":"2025-08-04T09:07:59.714Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: Unsupported conversion from object to objectId in $convert with no onError value","method":"GET","service":"user-service","url":"/?page=1&limit=6"}
 {"date":"2025-08-04T09:18:33.294Z","level":"error","message":"Assessment validation failed: budget: Path `budget` is required.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-04T11:44:26.937Z","level":"error","message":"Schema hasn't been registered for model \"user\".\nUse mongoose.model(name, schema)","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T11:45:50.198Z","level":"error","message":"Schema hasn't been registered for model \"users\".\nUse mongoose.model(name, schema)","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T12:30:48.037Z","level":"error","message":"_id is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T12:31:14.859Z","level":"error","message":"_id is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T12:32:32.617Z","level":"error","message":"mongoose is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T12:32:54.335Z","level":"error","message":"_id is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T12:36:06.055Z","level":"error","message":"_id is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T12:38:53.486Z","level":"error","message":"_id is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T13:01:30.995Z","level":"error","message":"mongoose is not defined","service":"user-service"}
+{"date":"2025-08-04T13:02:00.848Z","level":"error","message":"mongoose is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T13:06:30.769Z","level":"error","message":"currentUserId is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T13:08:50.941Z","level":"error","message":"currentUserId is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T13:09:29.602Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: $in requires an array as a second argument, found: missing","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T13:23:40.369Z","level":"error","message":"_id is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T13:24:04.780Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: $in requires an array as a second argument, found: null","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-04T13:24:40.240Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: $in requires an array as a second argument, found: missing","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
