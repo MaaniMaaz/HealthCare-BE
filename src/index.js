@@ -20,12 +20,12 @@ server.listen(PORT, () => {
   connectDB();
 });
 
-//socket.io
 global.io = socket(server, {
   cors: {
     origin: "*",
   },
 });
+
 
 global.io.on("connection", (socket) => {
   console.log("connected to socket", socket.id);

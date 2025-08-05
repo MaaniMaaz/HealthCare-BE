@@ -8,6 +8,7 @@ const auth = require("./auth")
 const article = require("./community/article")
 const comment = require("./community/comment")
 const reply = require("./community/reply")
+const dashboard = require("./dashboard")
 
 
 router.use("/auth", auth);
@@ -18,6 +19,7 @@ router.use("/tour", tour);
 router.use("/article", article);
 router.use("/comment", comment);
 router.use("/reply", reply);
-router.use("/community", article); // Add community route that uses article controller
+router.use("/community", article); 
+router.use("/dashboard", dashboard); 
 
 module.exports = router;

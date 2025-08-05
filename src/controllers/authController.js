@@ -4,8 +4,9 @@ const sendMail = require("../utils/sendMail");
 const SuccessHandler = require("../utils/SuccessHandler");
 const ErrorHandler = require("../utils/ErrorHandler");
 const { checkRateLimit } = require("../utils/rateLimiter");
-const ejs = require("ejs");
+const cloud = require("../functions/cloudinary");
 const path = require("path");
+const ejs = require("ejs");
 const jwt = require("jsonwebtoken");
 
 // Request login verification code
@@ -258,10 +259,22 @@ const updateProfile = async (req, res) => {
     const { name, phone } = req.body;
     const userId = req.user._id;
 
+     let fileUrls = [];
+    
+        if (req.files?.files?.length > 0) {
+          // Upload all files concurrently
+          fileUrls = await Promise.all(
+            req.files.files.map(async (file) => {
+              const filePath = `${Date.now()}-${path.parse(file.originalname).name}`;
+              const uploaded = await cloud.uploadStreamImage(file.buffer, filePath);
+              return uploaded.secure_url;
+            })
+          );
+        }
     // Validate input
-    if (!name && !phone) {
-      return ErrorHandler("At least one field (name or phone) is required", 400, req, res);
-    }
+    // if (!name && !phone) {
+    //   return ErrorHandler("At least one field (name or phone) is required", 400, req, res);
+    // }
 
     // Prepare update data
     const updateData = {};
@@ -280,6 +293,10 @@ const updateProfile = async (req, res) => {
       }
       updateData.phone = phone.trim();
     }
+
+    if (fileUrls.length > 0) {
+  updateData.profileImage = fileUrls[0]; 
+}
 
     // Update user
     const user = await User.findByIdAndUpdate(
