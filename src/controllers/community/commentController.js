@@ -131,7 +131,7 @@ const getAllComments = async (req, res) => {
   {
     $group: {
       _id: "$_id",
-      content: { $first: "$content" },
+      comment: { $first: "$comment" },
       user: { $first: "$user" },
       likes: { $first: "$likes" },
       createdAt: { $first: "$createdAt" },
