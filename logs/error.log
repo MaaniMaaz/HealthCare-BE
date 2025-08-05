@@ -33,3 +33,11 @@
 {"date":"2025-08-04T13:23:40.369Z","level":"error","message":"_id is not defined","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
 {"date":"2025-08-04T13:24:04.780Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: $in requires an array as a second argument, found: null","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
 {"date":"2025-08-04T13:24:40.240Z","level":"error","message":"PlanExecutor error during aggregation :: caused by :: $in requires an array as a second argument, found: missing","method":"GET","service":"user-service","url":"/688d2975b11ddc8c52af6f98"}
+{"date":"2025-08-05T14:50:05.422Z","level":"error","message":"Create your my care tour first","method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-05T14:50:34.314Z","level":"error","message":"Create your my care tour first","method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-05T14:51:38.431Z","level":"error","message":"Create your my care tour first","method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-05T14:53:01.215Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-05T14:55:14.216Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-05T14:55:49.223Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-05T14:57:34.323Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-05T14:58:06.290Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Tour = require("../models/tour");
 const VerificationCode = require("../models/VerificationCode");
 const sendMail = require("../utils/sendMail");
 const SuccessHandler = require("../utils/SuccessHandler");
@@ -24,6 +25,62 @@ const requestLoginCode = async (req, res) => {
     if (!emailRegex.test(email)) {
       return ErrorHandler("Please provide a valid email address", 400, req, res);
     }
+
+     const tours = await Tour.aggregate([
+       {
+      $addFields: {
+        bookingObjectId: {
+          $convert: {
+            input: "$booking",
+            to: "objectId",
+            onError: null,       
+            onNull: null
+          }
+        }
+      }
+    },
+    {
+      $lookup: {
+        from: "bookings",
+        localField: "bookingObjectId",
+        foreignField: "_id",
+        as: "booking"
+      }
+    },
+          {
+            $unwind: "$booking"
+          },
+          {
+            $lookup: {
+              from: "facilities",
+              localField: "booking.facility",
+              foreignField: "_id",
+              as: "facility"
+            }
+          },
+          {
+            $unwind: "$facility"
+          },
+          {
+            $lookup: {
+              from: "assessments",
+              localField: "facility.assessment",
+              foreignField: "_id",
+              as: "assessment"
+            }
+          },
+          {
+            $unwind: "$assessment"
+          },
+          {
+              $match: email ? { "assessment.email": email } : {}
+          },
+         
+        ]);
+
+if (!tours?.length || tours[0]?.data?.length === 0) {
+  return ErrorHandler({message:"Create your my care tour first",redirect:true}, 401, req, res);
+}
 
     // Check rate limiting
     const rateLimit = checkRateLimit(email);
