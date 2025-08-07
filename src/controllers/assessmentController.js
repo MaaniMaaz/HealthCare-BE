@@ -3,7 +3,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const Assessment = require("../models/assessment");
 const User = require("../models/User");
 
-const createAssessment = async (req,res) => {
+const createAssessment = async (req, res) => {
   // #swagger.tags = ['assessment']
   try {
     const {
@@ -20,11 +20,11 @@ const createAssessment = async (req,res) => {
       budget,
     } = req.body;
 
-        const newAssessment = await Assessment.create({
+    const newAssessment = await Assessment.create({
       name,
       email,
-     phone,
-     relationship,
+      phone,
+      relationship,
       currentSituation,
       careType,
       condition,
@@ -33,25 +33,34 @@ const createAssessment = async (req,res) => {
       urgency,
       budget,
     });
-    newAssessment.save();
 
-    const isExistedUser = await User.find({email})
+    // ❌ newAssessment.save() is unnecessary because .create() already saves it
 
-if(!isExistedUser){
+    // ✅ Use findOne instead of find to get a single document
+    const isExistedUser = await User.findOne({ email });
 
-  await User.create({
-    email,
-    name: name || email.split('@')[0],
-    deviceToken:   null,
-  });
-}
+    // ✅ Only create if not found
+    if (!isExistedUser) {
+      await User.create({
+        email,
+        name: name || email.split('@')[0],
+        deviceToken: null,
+      });
+    }
 
-    return SuccessHandler({message:"Assessment created along with user registeration",newAssessment}, 200, res);
- 
+    return SuccessHandler(
+      {
+        message: "Assessment created successfully",
+        newAssessment,
+      },
+      200,
+      res
+    );
   } catch (error) {
     return ErrorHandler(error.message, 500, req, res);
   }
 };
+
 
 const updateAssessment = async (req, res) => {
   // #swagger.tags = ['assessment']

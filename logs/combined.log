@@ -764,3 +764,18 @@
 {"date":"2025-08-07T15:45:32.818Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour?page=1&limit=3"}
 {"date":"2025-08-07T15:45:32.895Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/dashboard"}
 {"date":"2025-08-07T15:45:33.131Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour?page=1&limit=3"}
+{"date":"2025-08-07T15:53:22.944Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/auth/profile"}
+{"date":"2025-08-07T15:53:23.005Z","level":"error","message":"User not found or inactive","method":"GET","service":"user-service","url":"/profile"}
+{"date":"2025-08-07T15:53:23.043Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/refresh-token"}
+{"date":"2025-08-07T15:53:23.108Z","level":"error","message":"Invalid refresh token","method":"POST","service":"user-service","url":"/refresh-token"}
+{"date":"2025-08-07T15:54:09.824Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/request-login-code"}
+{"date":"2025-08-07T15:54:09.877Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-07T15:55:22.824Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/assessment"}
+{"date":"2025-08-07T15:55:23.005Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-08-07T15:55:23.012Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-08-07T15:55:23.031Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/facility"}
+{"date":"2025-08-07T15:55:34.840Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/booking"}
+{"date":"2025-08-07T15:55:39.475Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/login-without-code"}
+{"date":"2025-08-07T15:55:39.530Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-07T15:55:41.918Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/login-without-code"}
+{"date":"2025-08-07T15:55:41.967Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}

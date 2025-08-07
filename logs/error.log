@@ -50,3 +50,8 @@
 {"date":"2025-08-07T15:35:00.140Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
 {"date":"2025-08-07T15:36:12.829Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
 {"date":"2025-08-07T15:37:04.124Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-07T15:53:23.005Z","level":"error","message":"User not found or inactive","method":"GET","service":"user-service","url":"/profile"}
+{"date":"2025-08-07T15:53:23.108Z","level":"error","message":"Invalid refresh token","method":"POST","service":"user-service","url":"/refresh-token"}
+{"date":"2025-08-07T15:54:09.877Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-07T15:55:39.530Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-07T15:55:41.967Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}
