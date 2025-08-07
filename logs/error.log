@@ -41,3 +41,12 @@
 {"date":"2025-08-05T14:55:49.223Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
 {"date":"2025-08-05T14:57:34.323Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
 {"date":"2025-08-05T14:58:06.290Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-07T13:32:49.687Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-07T14:33:25.462Z","level":"error","message":"user.getJWTToken is not a function","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-07T14:35:24.097Z","level":"error","message":"Booked tour not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-07T14:37:02.482Z","level":"error","message":"Booked tour not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-07T14:39:10.056Z","level":"error","message":"Booked tour not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-07T14:52:13.951Z","level":"error","message":"Booked tour not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-07T15:35:00.140Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-07T15:36:12.829Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
+{"date":"2025-08-07T15:37:04.124Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}

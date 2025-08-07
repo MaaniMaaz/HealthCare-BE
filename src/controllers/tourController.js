@@ -1,6 +1,7 @@
 const SuccessHandler = require("../utils/SuccessHandler");
 const ErrorHandler = require("../utils/ErrorHandler");
 const Tour = require("../models/tour");
+const Booking = require("../models/booking");
 const { default: mongoose } = require("mongoose");
 
 const createTour = async (req,res) => {
@@ -141,34 +142,34 @@ const getAllTours = async (req, res) => {
       : {};
 
     // Alternative approach - assuming Tour has a booking field that's already an ObjectId
-    const tours = await Tour.aggregate([
-   {
-  $addFields: {
-    bookingObjectId: {
-      $convert: {
-        input: "$booking",
-        to: "objectId",
-        onError: null,       // <-- prevents aggregation failure
-        onNull: null
-      }
-    }
-  }
-},
-{
-  $lookup: {
-    from: "bookings",
-    localField: "bookingObjectId",
-    foreignField: "_id",
-    as: "booking"
-  }
-},
-      {
-        $unwind: "$booking"
-      },
+    const tours = await Booking.aggregate([
+//    {
+//   $addFields: {
+//     bookingObjectId: {
+//       $convert: {
+//         input: "$booking",
+//         to: "objectId",
+//         onError: null,       // <-- prevents aggregation failure
+//         onNull: null
+//       }
+//     }
+//   }
+// },
+// {
+//   $lookup: {
+//     from: "bookings",
+//     localField: "bookingObjectId",
+//     foreignField: "_id",
+//     as: "booking"
+//   }
+// },
+//       {
+//         $unwind: "$booking"
+//       },
       {
         $lookup: {
           from: "facilities",
-          localField: "booking.facility",
+          localField: "facility",
           foreignField: "_id",
           as: "facility"
         }

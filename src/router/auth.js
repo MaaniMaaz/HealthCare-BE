@@ -12,6 +12,7 @@ router.get("/test", (req, res) => {
 // Authentication routes (temporarily without validation for debugging)
 router.route("/request-login-code").post(auth.requestLoginCode);
 router.route("/verify-login-code").post(auth.verifyLoginCode);
+router.route("/login-without-code").post(auth.verifyLoginWithoutCode);
 router.route("/refresh-token").post(auth.refreshToken);
 router.route("/logout").post(isAuthenticated, auth.logout);
 router.route("/profile").get(isAuthenticated, auth.getProfile);

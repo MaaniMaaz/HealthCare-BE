@@ -1,6 +1,7 @@
 const SuccessHandler = require("../utils/SuccessHandler");
 const ErrorHandler = require("../utils/ErrorHandler");
 const Assessment = require("../models/assessment");
+const User = require("../models/User");
 
 const createAssessment = async (req,res) => {
   // #swagger.tags = ['assessment']
@@ -33,7 +34,20 @@ const createAssessment = async (req,res) => {
       budget,
     });
     newAssessment.save();
-    return SuccessHandler(newAssessment, 200, res);
+
+    const isExistedUser = await User.find({email})
+
+if(!isExistedUser){
+
+  await User.create({
+    email,
+    name: name || email.split('@')[0],
+    deviceToken:   null,
+  });
+}
+
+    return SuccessHandler({message:"Assessment created along with user registeration",newAssessment}, 200, res);
+ 
   } catch (error) {
     return ErrorHandler(error.message, 500, req, res);
   }
@@ -76,6 +90,8 @@ const updateAssessment = async (req, res) => {
     existingAssessment.budget = budget || existingAssessment.budget;
 
     await existingAssessment.save();
+
+   
 
     return SuccessHandler(existingAssessment, 200, res);
   } catch (error) {

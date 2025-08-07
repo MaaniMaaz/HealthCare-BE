@@ -71,7 +71,7 @@ const getBookingById = async (req, res) => {
     populate: {
       path: "assessment",
     },
-  });;
+  });
 
     if (!facility) {
       return ErrorHandler("Booking not found", 404, req, res);

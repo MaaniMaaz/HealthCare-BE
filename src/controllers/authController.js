@@ -9,6 +9,7 @@ const cloud = require("../functions/cloudinary");
 const path = require("path");
 const ejs = require("ejs");
 const jwt = require("jsonwebtoken");
+const Booking = require("../models/booking");
 
 // Request login verification code
 const requestLoginCode = async (req, res) => {
@@ -26,34 +27,34 @@ const requestLoginCode = async (req, res) => {
       return ErrorHandler("Please provide a valid email address", 400, req, res);
     }
 
-     const tours = await Tour.aggregate([
-       {
-      $addFields: {
-        bookingObjectId: {
-          $convert: {
-            input: "$booking",
-            to: "objectId",
-            onError: null,       
-            onNull: null
-          }
-        }
-      }
-    },
-    {
-      $lookup: {
-        from: "bookings",
-        localField: "bookingObjectId",
-        foreignField: "_id",
-        as: "booking"
-      }
-    },
-          {
-            $unwind: "$booking"
-          },
+     const tours = await Booking.aggregate([
+    //    {
+    //   $addFields: {
+    //     bookingObjectId: {
+    //       $convert: {
+    //         input: "$booking",
+    //         to: "objectId",
+    //         onError: null,       
+    //         onNull: null
+    //       }
+    //     }
+    //   }
+    // },
+    // {
+    //   $lookup: {
+    //     from: "bookings",
+    //     localField: "bookingObjectId",
+    //     foreignField: "_id",
+    //     as: "booking"
+    //   }
+    // },
+    //       {
+    //         $unwind: "$booking"
+    //       },
           {
             $lookup: {
               from: "facilities",
-              localField: "booking.facility",
+              localField: "facility",
               foreignField: "_id",
               as: "facility"
             }
@@ -229,6 +230,77 @@ const verifyLoginCode = async (req, res) => {
   }
 };
 
+//login without code
+const verifyLoginWithoutCode = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // const booking = await Booking.aggregate([
+    //   {
+    //     $lookup: {
+    //       from: "facilities",
+    //       localField: "booking.facility",
+    //       foreignField: "_id",
+    //       as: "facility"
+    //     }
+    //   },
+    //   { $unwind: "$facility" },
+    //   {
+    //     $lookup: {
+    //       from: "assessments",
+    //       localField: "facility.assessment",
+    //       foreignField: "_id",
+    //       as: "assessment"
+    //     }
+    //   },
+    //   { $unwind: "$assessment" },
+    //   {
+    //     $match: email ? { "assessment.email": email } : {}
+    //   }
+    // ]);
+
+    // // Check if any bookings were found
+    // if (!booking || booking.length === 0) {
+    //   return ErrorHandler(`Booked tour not found`, 404, req, res);
+    // }
+
+    // Access the first matched booking
+    // const selectedBooking = booking[0];
+
+    // Now get the user using the email from the booking
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return ErrorHandler(`User not found`, 404, req, res);
+    }
+
+    const token = user.getJWTToken();
+    const refreshToken = user.getRefreshToken();
+
+    return SuccessHandler(
+      {
+        message: "Verification successful",
+        token,
+        refreshToken,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          profileImage: user.profileImage,
+          role: user.role,
+          lastLoginAt: user.lastLoginAt,
+        },
+      },
+      200,
+      res
+    );
+  } catch (error) {
+    return ErrorHandler(error.message, 500, req, res);
+  }
+};
+
+
 // Refresh JWT token
 const refreshToken = async (req, res) => {
   // #swagger.tags = ['auth']
@@ -392,6 +464,7 @@ const updateProfile = async (req, res) => {
 module.exports = {
   requestLoginCode,
   verifyLoginCode,
+  verifyLoginWithoutCode,
   refreshToken,
   logout,
   getProfile,
