@@ -797,3 +797,17 @@
 {"date":"2025-08-08T10:25:09.828Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-standalone-preset.js"}
 {"date":"2025-08-08T10:25:09.833Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-init.js"}
 {"date":"2025-08-08T10:25:10.947Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/favicon-32x32.png"}
+{"date":"2025-08-08T10:32:09.189Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/"}
+{"date":"2025-08-08T10:32:09.254Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui.css"}
+{"date":"2025-08-08T10:32:09.265Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-bundle.js"}
+{"date":"2025-08-08T10:32:09.271Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-standalone-preset.js"}
+{"date":"2025-08-08T10:32:09.274Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-init.js"}
+{"date":"2025-08-08T10:32:10.083Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/favicon-32x32.png"}
+{"date":"2025-08-08T13:34:13.582Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/request-login-code"}
+{"date":"2025-08-08T13:34:58.999Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/verify-login-code"}
+{"date":"2025-08-08T13:34:59.520Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour?page=1&limit=3"}
+{"date":"2025-08-08T13:34:59.583Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/dashboard"}
+{"date":"2025-08-08T13:34:59.719Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour?page=1&limit=3"}
+{"date":"2025-08-08T13:35:05.641Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour?page=1&limit=6"}
+{"date":"2025-08-08T13:35:06.111Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/tour?page=1&limit=6"}
+{"date":"2025-08-08T13:35:09.414Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/community?page=1&limit=10"}

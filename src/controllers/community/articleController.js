@@ -198,6 +198,11 @@ const getAllArticles = async (req, res) => {
         $unwind: "$userDetails"
       },
       {
+              $match: {
+               "userDetails.role":"user"
+              }
+            },
+      {
         $sort: { "createdAt": -1 }
       },
       {
