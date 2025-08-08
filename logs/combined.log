@@ -779,3 +779,21 @@
 {"date":"2025-08-07T15:55:39.530Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}
 {"date":"2025-08-07T15:55:41.918Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/auth/login-without-code"}
 {"date":"2025-08-07T15:55:41.967Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-08T09:49:50.799Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/community"}
+{"date":"2025-08-08T09:49:50.812Z","level":"error","message":"Access token is required","method":"GET","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:03:09.086Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/admin"}
+{"date":"2025-08-08T10:03:09.098Z","level":"error","message":"Access token is required","method":"GET","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:03:15.985Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/admin"}
+{"date":"2025-08-08T10:03:15.987Z","level":"error","message":"Access token is required","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:03:38.483Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/admin"}
+{"date":"2025-08-08T10:03:38.499Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:04:13.126Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/admin"}
+{"date":"2025-08-08T10:04:13.134Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:04:54.905Z","level":"info","message":"Request received","method":"POST","service":"user-service","url":"/admin"}
+{"date":"2025-08-08T10:25:09.640Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs"}
+{"date":"2025-08-08T10:25:09.687Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/"}
+{"date":"2025-08-08T10:25:09.780Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui.css"}
+{"date":"2025-08-08T10:25:09.786Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-bundle.js"}
+{"date":"2025-08-08T10:25:09.828Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-standalone-preset.js"}
+{"date":"2025-08-08T10:25:09.833Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/swagger-ui-init.js"}
+{"date":"2025-08-08T10:25:10.947Z","level":"info","message":"Request received","method":"GET","service":"user-service","url":"/api-docs/favicon-32x32.png"}

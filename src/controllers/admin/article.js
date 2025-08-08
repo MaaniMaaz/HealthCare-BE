@@ -6,11 +6,10 @@ const path = require("path");
 const { default: mongoose } = require("mongoose");
 
 const createArticle = async (req, res) => {
-  // #swagger.tags = ['article']
+  // #swagger.tags = ['admin']
   try {
     const { title, description } = req.body;
-    let { _id } = req.user;
-
+    const  _id = "6895c5dfc1b792c5581a9691"
 
 
     let fileUrls = [];
@@ -39,7 +38,7 @@ const createArticle = async (req, res) => {
 };
 
 const updateArticle = async (req, res) => {
-  // #swagger.tags = ['article']
+  // #swagger.tags = ['admin']
   try {
     const { id } = req.params;
     const {
@@ -81,10 +80,10 @@ const updateArticle = async (req, res) => {
 };
 
 const getArticleById = async (req, res) => {
-  // #swagger.tags = ['booking']
+  // #swagger.tags = ['admin']
   try {
     const { id } = req.params;
-    const { _id } = req.user;
+       const  _id = "6895c5dfc1b792c5581a9691"
 
     // const article = await Article.findById(id).populate("user")
     const article = await Article.aggregate([
@@ -133,7 +132,7 @@ const getArticleById = async (req, res) => {
 };
 
 const deleteArticle = async (req, res) => {
-  // #swagger.tags = ['article']
+  // #swagger.tags = ['admin']
   try {
     const { id } = req.params;
 
@@ -150,9 +149,9 @@ const deleteArticle = async (req, res) => {
 };
 
 const getAllArticles = async (req, res) => {
-  // #swagger.tags = ['article']
+  // #swagger.tags = ['admin']
   try {
-    const { _id } = req.user;
+       const  _id = "6895c5dfc1b792c5581a9691"
     const { title, page = 1, limit = 10 } = req.query;
     
     const matchStage = title
@@ -218,10 +217,10 @@ const getAllArticles = async (req, res) => {
 };
 
 const getMyArticles = async (req, res) => {
-  // #swagger.tags = ['article']
+  // #swagger.tags = ['admin']
   try {
     
-    const { _id } = req.user;
+       const  _id = "6895c5dfc1b792c5581a9691"
     const { title, page = 1, limit = 10 } = req.query;
     const matchStage = {
       user: _id, 
@@ -252,10 +251,10 @@ const getMyArticles = async (req, res) => {
 };
 
 const likeArticle = async (req, res) => {
-  // #swagger.tags = ['article']
+  // #swagger.tags = ['admin']
   try {
     const { id } = req.params;
-    const { _id } = req.user;
+       const  _id = "6895c5dfc1b792c5581a9691"
 
     const existingArticle = await Article.findById(id);
 
@@ -297,10 +296,10 @@ const likeArticle = async (req, res) => {
 };
 
 const dislikeArticle = async (req, res) => {
-  // #swagger.tags = ['article']
+  // #swagger.tags = ['admin']
   try {
     const { id } = req.params;
-    const { _id } = req.user;
+       const  _id = "6895c5dfc1b792c5581a9691"
 
     const existingArticle = await Article.findById(id);
 

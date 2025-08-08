@@ -55,3 +55,8 @@
 {"date":"2025-08-07T15:54:09.877Z","level":"error","message":{"message":"Create your my care tour first","redirect":true},"method":"POST","service":"user-service","url":"/request-login-code"}
 {"date":"2025-08-07T15:55:39.530Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}
 {"date":"2025-08-07T15:55:41.967Z","level":"error","message":"User not found","method":"POST","service":"user-service","url":"/login-without-code"}
+{"date":"2025-08-08T09:49:50.812Z","level":"error","message":"Access token is required","method":"GET","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:03:09.098Z","level":"error","message":"Access token is required","method":"GET","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:03:15.987Z","level":"error","message":"Access token is required","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:03:38.499Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-08T10:04:13.134Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"POST","service":"user-service","url":"/"}
