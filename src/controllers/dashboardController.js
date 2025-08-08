@@ -7,9 +7,11 @@ const stats = async (req,res) => {
   // #swagger.tags = ['dashboard']
   try {
    
-    const userCount = await User.countDocuments();
-    const articleCount = await Article.countDocuments();
+   const userCount = await User.countDocuments({ role: "user" });
 
+const articleCount = await Article.countDocuments({
+  user: { $ne: "6895c5dfc1b792c5581a9691" }
+});
     const stats = {
         userCount,
         articleCount

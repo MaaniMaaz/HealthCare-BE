@@ -13,15 +13,14 @@ router
     uploader.fields([{ name: "files", maxCount: 3 }]),
     article.createArticle
   );
-router.route("/article/:id").get(isAuthenticated,article.getArticleById);
+router.route("/article/:id").get(article.getArticleById);
 router
   .route("/update-article/:id")
   .put(
-    isAuthenticated,
     uploader.fields([{ name: "files", maxCount: 3 }]),
     article.updateArticle
   );
-router.route("/article/:id").delete(isAuthenticated,article.deleteArticle);
+router.route("/article/:id").delete(article.deleteArticle);
 
 // router.route("/like/:id").get(isAuthenticated, article.likeArticle);
 // router.route("/dislike/:id").get(isAuthenticated, article.dislikeArticle);

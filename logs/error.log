@@ -60,3 +60,6 @@
 {"date":"2025-08-08T10:03:15.987Z","level":"error","message":"Access token is required","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-08T10:03:38.499Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"POST","service":"user-service","url":"/"}
 {"date":"2025-08-08T10:04:13.134Z","level":"error","message":"Cannot destructure property '_id' of 'req.user' as it is undefined.","method":"POST","service":"user-service","url":"/"}
+{"date":"2025-08-08T14:19:03.548Z","level":"error","message":"Access token is required","method":"GET","service":"user-service","url":"/article/6896074c5c6bdfc3feb63040"}
+{"date":"2025-08-08T14:19:26.992Z","level":"error","message":"Access token is required","method":"PUT","service":"user-service","url":"/update-article/6896074c5c6bdfc3feb63040"}
+{"date":"2025-08-08T14:21:33.975Z","level":"error","message":"Invalid image file","method":"PUT","service":"user-service","url":"/update-article/6896074c5c6bdfc3feb63040"}
